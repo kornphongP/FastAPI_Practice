@@ -1,10 +1,10 @@
 from fastapi import FastAPI
-from routers import items, records
+from routers.v1 import routers
 
 
 app = FastAPI()
-app.include_router(items.router, prefix="/test")
-app.include_router(records.router, prefix="/test")
+for router, prefix in routers:
+    app.include_router(router, prefix=prefix)
 
 
 @app.get("/fetch")
